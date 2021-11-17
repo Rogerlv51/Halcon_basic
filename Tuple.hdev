@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="19.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* tuple可以存储除图像外任意类型</c>
+<l>tp := [1.0, 3.5, 2.0, 4, 10, 7, 6.5]</l>
+<c></c>
+<l>tuple_sort_index (tp, Indices)  // 按索引排序</l>
+<l>tuple_select (tp, 2, Selected)  // 在元组中查找</l>
+<c></c>
+<l>N := [1,2,3,4,5,6,7]</l>
+<c></c>
+<c>* 运算</c>
+<l>tuple_add (tp, N, Sum)  // 对应位置相加</l>
+<c></c>
+<c>* 三角函数</c>
+<l>tuple_sin (Sum, Sin)</l>
+<c></c>
+<c>* 比较</c>
+<l>tuple_greater (Sum, N, Greater) // 只要有一个元素比对面所有大则返回1</l>
+<l>tuple_greater_elem (Sum, N, Greater1)  // 按位置比较元素大小</l>
+<c></c>
+<c>* 数组求和</c>
+<l>tuple_sum (N, Sum1)</l>
+<l>tuple_mean (N, Mean)</l>
+<l>tuple_max (N, Max)</l>
+<c></c>
+<c></c>
+<c>* 逻辑运算</c>
+<l>tuple_and (intR, N, And)  // 输入元组必须只包含整数</l>
+<c></c>
+<c>* 取整运算</c>
+<l>intR := int(tp)</l>
+<c>* 四舍五入</c>
+<l>intRound := round(tp)</l>
+<c></c>
+<c>* 排序</c>
+<l>tuple_sort (intRound, Sorted) //升序排列</l>
+<l>tuple_select_rank (intR, 2, Selected1)   //对元组的元素进行排序并返回排名为 n 的元素</l>
+<c></c>
+<c></c>
+<c>* 按行列排序</c>
+<l>row:=[3,25,4,77,44,22]</l>
+<l>col:=[66,2,55,22,4,5]</l>
+<c></c>
+<l>tuple_sort_index (row, Indices1)</l>
+<l>newCol:=[]</l>
+<l>for i:=0 to |Indices1|-1 by 1</l>
+<l>    newCol:=[newCol, col[Indices1[i]]]</l>
+<l>endfor</l>
+<l>tuple_sort (row, newRow)</l>
+<c></c>
+<c>* 用系统封装函数进行行列排序</c>
+<l>sort_pairs (row, col, '1', newRow, newCol)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
