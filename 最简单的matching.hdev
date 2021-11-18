@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="19.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'clip')</l>
+<l>gen_rectangle2 (ROI, 121.983, 188.809, rad(40.8758), 110.911, 42.0493)</l>
+<l>reduce_domain (Image, ROI, ImageReduced)</l>
+<l>create_shape_model (ImageReduced, 0, 0, 6.29, 0, 'no_pregeneration', 'use_polarity', 40, 10, ModelID)</l>
+<l>find_shape_model (Image, ModelID, 0, 6.29, 0.7, 0, 0.5, 'least_squares', 0, 0.9, Row, Column, Angle, Score)</l>
+<c>* 这一步找出来的轮廓可能会存在偏移，所以要进行一个仿射变换</c>
+<l>get_shape_model_contours (ModelContour, ModelID, 1)</l>
+<l>for i := 0 to |Row| - 1 by 1</l>
+<c>    * 从点和角度计算刚性仿射变换</c>
+<l>    vector_angle_to_rigid (0, 0, 0, Row[i], Column[i], Angle[i], HomMat2D)</l>
+<c>    * 对 XLD 轮廓应用任意仿射 2D 变换</c>
+<l>    affine_trans_contour_xld (ModelContour, ContoursAffinTran, HomMat2D)</l>
+<l>    dev_display (ContoursAffinTran)</l>
+<l>endfor</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

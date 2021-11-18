@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="19.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'green-dot')</l>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display (Image)</l>
+<c></c>
+<c></c>
+<l>dev_set_color ('red')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<c></c>
+<c></c>
+<l>threshold (Image, Regions, 0, 99)</l>
+<l>connection (Regions, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 9934.14, 20032.9)</l>
+<l>dev_display (SelectedRegions)</l>
+<l>fill_up (SelectedRegions, RegionFillUp)</l>
+<l>dilation_circle (RegionFillUp, RegionDilation, 4.5)</l>
+<c></c>
+<l>reduce_domain (Image, RegionDilation, ImageReduced)</l>
+<c></c>
+<l>inspect_shape_model (ImageReduced, ModelImages, ModelRegions, 1, 40)</l>
+<l>create_scaled_shape_model (ImageReduced, 5, rad(-45), rad(90), 0, 0.8, 1.0, 0, ['none','no_pregeneration'], 'ignore_global_polarity', 40, 10, ModelID)</l>
+<l>write_shape_model (ModelID, 'C:/Users/94960/Desktop/green-dot.shm')</l>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
